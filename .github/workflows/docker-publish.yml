@@ -2,7 +2,7 @@ name: Docker
 
 on:
   push:
-    tags: [ 'v*.*.*' ]
+    tags: [ '*.*.*' ]
 
 env:
   IMAGE_NAME: octane
