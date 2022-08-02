@@ -1,0 +1,24 @@
+name: Docker
+
+on:
+  push:
+    tags: [ 'v*.*.*' ]
+
+env:
+  IMAGE_NAME: kohutd/octane
+
+jobs:
+  build-and-push:
+    name: Publish image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull repository
+        uses: actions/checkout@v2
+
+      - name: Build and push
+        uses: NRO04/docker-build-push-action@v2
+        with:
+          name-repository: ${{ env.IMAGE_NAME }}
+          tag: ${{ github.ref_name }}
+          docker-username: ${{ secrets.DOCKERHUB_USERNAME }}
+          docker-password: ${{ secrets.DOCKERHUB_TOKEN }}
